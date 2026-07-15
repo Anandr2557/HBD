@@ -18,7 +18,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background-color: #f7ebe8; /* Warm, soft cream background */
+      background-color: #f7ebe8;
       color: #4a3e3d;
     }
 
@@ -77,6 +77,29 @@
       font-size: 0.8rem;
       color: #9c8481;
       margin-top: 0.3rem;
+    }
+
+    .error-alert {
+      position: absolute;
+      top: 15%;
+      background: rgba(217, 125, 125, 0.95);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: 0 4px 15px rgba(217, 125, 125, 0.3);
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 101;
+      pointer-events: none;
+      text-align: center;
+    }
+
+    .error-alert.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .dots-container {
@@ -176,12 +199,11 @@
       z-index: 99;
     }
 
-    /* Tab Content Area */
     .tab-content {
       flex: 1;
       width: 100%;
       overflow-y: auto;
-      padding: 1.5rem 1.5rem 6rem 1.5rem; /* Space at bottom for nav bar */
+      padding: 1.5rem 1.5rem 6.5rem 1.5rem;
       display: none;
     }
 
@@ -195,7 +217,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Minimalist iOS Navigation Bar */
     .nav-bar {
       position: absolute;
       bottom: 0;
@@ -213,13 +234,17 @@
     }
 
     .nav-item {
-      display: flex;
+      display: none;
       flex-direction: column;
       align-items: center;
       font-size: 0.75rem;
       color: #9c8481;
       cursor: pointer;
       transition: color 0.3s ease;
+    }
+
+    .nav-item.unlocked {
+      display: flex;
     }
 
     .nav-item.active {
@@ -230,6 +255,27 @@
     .nav-icon {
       font-size: 1.3rem;
       margin-bottom: 2px;
+    }
+
+    .journey-btn {
+      display: block;
+      width: 80%;
+      max-width: 280px;
+      background-color: #b07d72;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 25px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 2rem auto 1rem auto;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(176, 125, 114, 0.25);
+      text-align: center;
+    }
+
+    .journey-btn:active {
+      transform: scale(0.98);
     }
 
     /* --- TAB 1: OUR STORY (TIMELINE) --- */
@@ -302,7 +348,7 @@
       color: #635351;
     }
 
-    /* --- TAB 3: THE WISH (LOVE LETTER + COUPOUNS) --- */
+    /* --- TAB 3: THE WISH (LOVE LETTER + COUPUNS) --- */
     .polaroid {
       background: white;
       padding: 12px 12px 24px 12px;
@@ -323,6 +369,7 @@
       justify-content: center;
       font-size: 3.5rem;
       border-radius: 2px;
+      overflow: hidden;
     }
 
     .polaroid-caption {
@@ -350,7 +397,6 @@
       text-align: justify;
     }
 
-    /* Virtual Gift Coupon Cards */
     .gift-container {
       margin-top: 2rem;
     }
@@ -391,6 +437,8 @@
 
     .coupon-details {
       padding-left: 8px;
+      padding-right: 8px;
+      flex: 1;
     }
 
     .coupon-heading {
@@ -402,6 +450,7 @@
     .coupon-sub {
       font-size: 0.75rem;
       color: #9c8481;
+      margin-top: 2px;
     }
 
     .claim-btn {
@@ -421,6 +470,170 @@
       background: #c2b5b2;
       box-shadow: none;
       cursor: default;
+    }
+
+    /* --- TAB: OUR MEMORIES (POLAROID GALLERY) --- */
+    .memory-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem 1rem;
+      margin: 2rem 0;
+      padding: 0 0.5rem;
+    }
+
+    .memory-polaroid {
+      background: white;
+      padding: 10px 10px 20px 10px;
+      box-shadow: 0 8px 20px rgba(163, 145, 142, 0.18);
+      border-radius: 4px;
+      width: 130px;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .memory-polaroid:nth-child(1) { transform: rotate(-6deg); }
+    .memory-polaroid:nth-child(2) { transform: rotate(4deg); margin-top: 1.5rem; }
+    .memory-polaroid:nth-child(3) { transform: rotate(-3deg); }
+    .memory-polaroid:nth-child(4) { transform: rotate(7deg); margin-top: 1rem; }
+    .memory-polaroid:nth-child(5) { transform: rotate(-8deg); margin-top: 0.5rem; }
+    .memory-polaroid:nth-child(6) { transform: rotate(5deg); }
+
+    .memory-polaroid:active {
+      transform: scale(1.08) rotate(0deg) !important;
+      box-shadow: 0 12px 30px rgba(163, 145, 142, 0.3);
+      z-index: 5;
+    }
+
+    .memory-img {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #fceae6, #f4d9d2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .memory-img::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+      transform: skewX(-20deg);
+      animation: shineSweep 3.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes shineSweep {
+      0% { left: -75%; }
+      50% { left: 125%; }
+      100% { left: 125%; }
+    }
+
+    .memory-caption {
+      text-align: center;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      font-size: 0.75rem;
+      margin-top: 8px;
+      color: #6e5a58;
+    }
+
+    .memory-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+
+    /* Lightbox Overlay */
+    #lightbox-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(74, 62, 61, 0.85);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 2rem;
+    }
+
+    #lightbox-overlay.show {
+      display: flex;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    .lightbox-card {
+      background: white;
+      padding: 16px 16px 30px 16px;
+      border-radius: 6px;
+      max-width: 300px;
+      width: 100%;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .lightbox-img {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #fceae6, #f4d9d2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .lightbox-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+
+    .lightbox-caption {
+      text-align: center;
+      font-family: 'Georgia', serif;
+      font-style: italic;
+      font-size: 1rem;
+      margin-top: 14px;
+      color: #6e5a58;
+    }
+
+    .lightbox-close {
+      display: block;
+      margin: 1.2rem auto 0 auto;
+      background: #b07d72;
+      color: white;
+      border: none;
+      padding: 8px 22px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .sparkle {
+      position: absolute;
+      pointer-events: none;
+      font-size: 1rem;
+      z-index: 999;
+      animation: sparklePop 0.8s ease-out forwards;
+    }
+
+    @keyframes sparklePop {
+      0% { transform: translate(0,0) scale(0.5); opacity: 1; }
+      100% { transform: translate(var(--sx), var(--sy)) scale(1.3); opacity: 0; }
     }
 
     /* --- TAB 4: THE PROPOSAL DATE --- */
@@ -501,7 +714,6 @@
       z-index: 3;
     }
 
-    /* Accepted State Layout */
     .success-box {
       display: none;
       text-align: center;
@@ -560,13 +772,14 @@
 
   <!-- PAGE 1: THE LOCK SCREEN -->
   <div id="lock-screen" class="page">
+    <div class="error-alert" id="error-alert">Oops! Wrong numbers, but you're still cute! Try again ♥️</div>
+
     <div class="header-info">
       <div class="lock-icon">🔒</div>
-      <div class="lock-title">Enter Passcode</div>
-      <div class="lock-subtitle">Hint: Our special numbers ❤️</div>
+      <div class="lock-title">Enter Passcode to Unlock</div>
+      <div class="lock-subtitle">Hint: My Password</div>
     </div>
 
-    <!-- Passcode Visual Dots -->
     <div class="dots-container">
       <div class="dot" id="dot-0"></div>
       <div class="dot" id="dot-1"></div>
@@ -576,7 +789,6 @@
       <div class="dot" id="dot-5"></div>
     </div>
 
-    <!-- iOS style Keypad -->
     <div class="keypad">
       <div class="key" onclick="pressKey('1')">1<span class="key-letters">&nbsp;</span></div>
       <div class="key" onclick="pressKey('2')">2<span class="key-letters">ABC</span></div>
@@ -596,84 +808,88 @@
     </div>
   </div>
 
-
-  <!-- MULTI-PAGE PORTAL (Unlocks with passcode) -->
+  <!-- MULTI-PAGE PORTAL -->
   <div id="portal-container" class="hidden">
     <canvas id="confetti"></canvas>
 
-    <!-- ================= TAB 1: OUR STORY ================= -->
+    <!-- TAB 1: OUR STORY -->
     <div id="tab-story" class="tab-content active">
       <h2 class="section-title" style="margin-top: 1rem;">Our Chapters 📖</h2>
       <p style="text-align: center; font-size: 0.85rem; color: #9c8481; margin-bottom: 1.5rem;">How we got to where we are today.</p>
 
       <div class="timeline">
         <div class="timeline-node">
-          <div class="timeline-date">The Day We Met</div>
+          <div class="timeline-date">The Day We Met 😍</div>
           <div class="timeline-card">
             My world got a whole lot brighter. I didn't know it yet, but you were going to become my absolute favorite person.
           </div>
         </div>
 
         <div class="timeline-node">
-          <div class="timeline-date">Our First Date</div>
+          <div class="timeline-date">Our First Date 🎦 </div>
           <div class="timeline-card">
             Uncontrollable butterflies. I was trying so hard to be cool, but looking at you, I was already completely mesmerized.
           </div>
         </div>
 
         <div class="timeline-node">
-          <div class="timeline-date">Countless Laughs Later</div>
+          <div class="timeline-date">Countless Laughs Later 😁</div>
           <div class="timeline-card">
-            From late-night talks to inside jokes only we understand, every memory is my favorite because it's with you.
+            From Useless talks to inside jokes only we understand, every memory is my favorite because it's with you.
           </div>
         </div>
       </div>
+
+      <button class="journey-btn" onclick="unlockNextStep('tab-promises', 'nav-promises')">Continue Journey ✨</button>
     </div>
 
-    <!-- ================= TAB 2: MY PROMISES ================= -->
+    <!-- TAB 2: MY PROMISES -->
     <div id="tab-promises" class="tab-content">
       <h2 class="section-title" style="margin-top: 1rem;">My Vows To You 🤍</h2>
       <p style="text-align: center; font-size: 0.85rem; color: #9c8481;">Because loving you is an action, every single day.</p>
 
       <div class="cards-grid">
         <div class="promise-card">
-          <div class="promise-title">To Always Listen</div>
+          <div class="promise-title">To Always Listen ✅</div>
           <div class="promise-body">Even when you're just venting about the smallest thing, I am here to hold your hand and hear it all.</div>
         </div>
 
         <div class="promise-card">
-          <div class="promise-title">To Protect Your Smile</div>
+          <div class="promise-title">To Protect Your Smile 😊</div>
           <div class="promise-body">Whenever days get heavy, I promise to do my absolute best to bring back that gorgeous laugh of yours.</div>
         </div>
 
         <div class="promise-card">
-          <div class="promise-title">To Choose You</div>
+          <div class="promise-title">To Choose You 🙋🏻‍♂️</div>
           <div class="promise-body">In a world full of noise, you will always be my quiet peace. I will choose you, today, tomorrow, and every day after.</div>
         </div>
       </div>
+
+      <button class="journey-btn" onclick="unlockNextStep('tab-wish', 'nav-wish')">Read My Wishes 💝</button>
     </div>
 
-    <!-- ================= TAB 3: THE WISH ================= -->
+    <!-- TAB 3: THE WISH -->
     <div id="tab-wish" class="tab-content">
-      <!-- Polaroid -->
+      <!-- Main polaroid with YOUR photo -->
       <div class="polaroid">
-        <div class="polaroid-img">👑✨</div>
+        <div class="polaroid-img">
+          <img src="photos/our-favorite-photo.jpg" alt="Happy Birthday, Beautiful!" style="width:100%;height:100%;object-fit:cover;border-radius:2px;">
+        </div>
         <div class="polaroid-caption">Happy Birthday, Beautiful!</div>
       </div>
 
-      <h1 class="section-title">Happy Birthday! 🎉</h1>
+      <h1 class="section-title">Happy Birthday Lachu ❤️ 🎉</h1>
       <p class="letter-body">
         Thank you for filling my days with warmth and a love that feels like home. I am incredibly grateful to walk through life by your side. You deserve the absolute world.
       </p>
 
-      <!-- Interactive Birthday Coupons -->
       <div class="gift-container">
         <div class="gift-title">🎟️ Redeemable Birthday Coupons</div>
         
         <div class="coupon">
           <div class="coupon-details">
-            <div class="coupon-heading">One Cozy Dinner Date 🍕</div>
-            <div class="coupon-sub">Your choice of venue, completely on me.</div>
+            <div class="coupon-heading">Unlimitied Movie & Food dates 🎬 🍕</div>
+            <div class="coupon-sub">Completely on me.</div>
           </div>
           <button class="claim-btn" onclick="claimCoupon(this)">Claim</button>
         </div>
@@ -688,17 +904,68 @@
 
         <div class="coupon">
           <div class="coupon-details">
-            <div class="coupon-heading">Spa & Massage Night 💆‍♀️</div>
-            <div class="coupon-sub">I'll play massage therapist while you relax.</div>
+            <div class="coupon-heading">Lifetime Support 🛡️</div>
+            <div class="coupon-sub">Even when the world is against you, I am on your team.</div>
           </div>
           <button class="claim-btn" onclick="claimCoupon(this)">Claim</button>
         </div>
       </div>
+
+      <button class="journey-btn" onclick="unlockNextStep('tab-memories', 'nav-memories')">See Our Memories 📸</button>
     </div>
 
-    <!-- ================= TAB 4: THE INTERACTIVE PROPOSAL ================= -->
+    <!-- TAB: OUR MEMORIES (POLAROID GALLERY WITH YOUR PHOTOS) -->
+    <div id="tab-memories" class="tab-content">
+      <h2 class="section-title" style="margin-top: 1rem;">Our Memories 📸</h2>
+      <p style="text-align: center; font-size: 0.85rem; color: #9c8481; margin-bottom: 0.5rem;">
+        A little scrapbook of us — tap a photo to relive it ✨
+      </p>
+
+      <div class="memory-gallery" id="memory-gallery">
+        <!-- ⚠️ REPLACE THE FILENAMES BELOW WITH YOUR ACTUAL PHOTO NAMES -->
+        <div class="memory-polaroid" onclick="openLightbox(this, 'photos/cheers.jpg', 'That night we couldn\'t stop laughing')">
+          <div class="memory-img">
+            <img src="photos/cheers.jpg" alt="Cheers to us">
+          </div>
+          <div class="memory-caption">Cheers to us</div>
+        </div>
+        <div class="memory-polaroid" onclick="openLightbox(this, 'photos/sunset.jpg', 'Sunset chats, my favorite kind')">
+          <div class="memory-img">
+            <img src="photos/sunset.jpg" alt="Golden hour">
+          </div>
+          <div class="memory-caption">Golden hour</div>
+        </div>
+        <div class="memory-polaroid" onclick="openLightbox(this, 'photos/foodie.jpg', 'Our silly food adventures')">
+          <div class="memory-img">
+            <img src="photos/foodie.jpg" alt="Foodie us">
+          </div>
+          <div class="memory-caption">Foodie us</div>
+        </div>
+        <div class="memory-polaroid" onclick="openLightbox(this, 'photos/our-song.jpg', 'Loving every second')">
+          <div class="memory-img">
+            <img src="photos/our-song.jpg" alt="Our song">
+          </div>
+          <div class="memory-caption">Our song</div>
+        </div>
+        <div class="memory-polaroid" onclick="openLightbox(this, 'photos/roadtrip.jpg', 'Random drives, best conversations')">
+          <div class="memory-img">
+            <img src="photos/roadtrip.jpg" alt="Road trip">
+          </div>
+          <div class="memory-caption">Road trip</div>
+        </div>
+        <div class="memory-polaroid" onclick="openLightbox(this, 'photos/just-us.jpg', 'Just us, being us')">
+          <div class="memory-img">
+            <img src="photos/just-us.jpg" alt="Simply us">
+          </div>
+          <div class="memory-caption">Simply us</div>
+        </div>
+      </div>
+
+      <button class="journey-btn" onclick="unlockNextStep('tab-date', 'nav-date')">One Last Thing... 📅</button>
+    </div>
+
+    <!-- TAB 5: THE PROPOSAL DATE -->
     <div id="tab-date" class="tab-content">
-      <!-- Unaccepted Proposal Container -->
       <div class="proposal-box" id="ask-container">
         <div class="proposal-emoji">🥺👉👈</div>
         <h2 class="section-title">A Special Request...</h2>
@@ -710,7 +977,6 @@
         </div>
       </div>
 
-      <!-- Accepted Success Container -->
       <div class="proposal-box success-box" id="success-container">
         <div class="proposal-emoji">🎉🥂💖</div>
         <h2 class="success-title">Yay! It's a Date!</h2>
@@ -718,27 +984,40 @@
         
         <div class="success-details">
           <div class="detail-item">📅 <strong>When:</strong> This coming weekend!</div>
-          <div class="detail-item">📍 <strong>Where:</strong> Your favorite spot.</div>
+          <div class="detail-item">📍 <strong>Where:</strong> Surprise </div>
           <div class="detail-item">✨ <strong>Dress Code:</strong> Looking beautiful (which is effortless for you).</div>
         </div>
       </div>
     </div>
 
+    <!-- Lightbox Overlay -->
+    <div id="lightbox-overlay" onclick="closeLightboxOnOverlay(event)">
+      <div class="lightbox-card">
+        <div class="lightbox-img" id="lightbox-img">📸</div>
+        <div class="lightbox-caption" id="lightbox-caption">Caption</div>
+        <button class="lightbox-close" onclick="closeLightbox()">Close</button>
+      </div>
+    </div>
+
     <!-- BOTTOM TAB NAVIGATION BAR -->
     <div class="nav-bar">
-      <div class="nav-item active" onclick="switchTab('tab-story', this)">
+      <div class="nav-item unlocked active" id="nav-story" onclick="switchTab('tab-story', this)">
         <span class="nav-icon">📖</span>
         <span>Our Story</span>
       </div>
-      <div class="nav-item" onclick="switchTab('tab-promises', this)">
+      <div class="nav-item" id="nav-promises" onclick="switchTab('tab-promises', this)">
         <span class="nav-icon">✨</span>
         <span>Vows</span>
       </div>
-      <div class="nav-item" onclick="switchTab('tab-wish', this)">
+      <div class="nav-item" id="nav-wish" onclick="switchTab('tab-wish', this)">
         <span class="nav-icon">💝</span>
         <span>The Wish</span>
       </div>
-      <div class="nav-item" onclick="switchTab('tab-date', this)">
+      <div class="nav-item" id="nav-memories" onclick="switchTab('tab-memories', this)">
+        <span class="nav-icon">📸</span>
+        <span>Memories</span>
+      </div>
+      <div class="nav-item" id="nav-date" onclick="switchTab('tab-date', this)">
         <span class="nav-icon">📅</span>
         <span>Date?</span>
       </div>
@@ -750,7 +1029,6 @@
     const CORRECT_PASSCODE = "812557";
     let currentInput = "";
 
-    // Keypad Logic
     function pressKey(num) {
       if (currentInput.length < 6) {
         currentInput += num;
@@ -787,6 +1065,13 @@
           const dot = document.getElementById(`dot-${i}`);
           dot.classList.add('error');
         }
+        
+        const alertBox = document.getElementById('error-alert');
+        alertBox.classList.add('show');
+        setTimeout(() => {
+          alertBox.classList.remove('show');
+        }, 3000);
+
         if (navigator.vibrate) navigator.vibrate(200);
         
         setTimeout(() => {
@@ -801,8 +1086,23 @@
       startConfetti();
     }
 
-    // Tab Switcher Logic
+    function unlockNextStep(tabId, navItemId) {
+      const navOrder = ['nav-story', 'nav-promises', 'nav-wish', 'nav-memories', 'nav-date'];
+      const targetIndex = navOrder.indexOf(navItemId);
+      
+      for (let i = 0; i <= targetIndex; i++) {
+        const navItem = document.getElementById(navOrder[i]);
+        if (navItem) {
+          navItem.classList.add('unlocked');
+        }
+      }
+      
+      switchTab(tabId, document.getElementById(navItemId));
+    }
+
     function switchTab(tabId, el) {
+      if (!el.classList.contains('unlocked')) return;
+
       document.querySelectorAll('.tab-content').forEach(tab => {
         tab.classList.remove('active');
       });
@@ -814,18 +1114,15 @@
       el.classList.add('active');
     }
 
-    // Interactive Vouchers
     function claimCoupon(btn) {
       btn.innerText = "Claimed! ♥️";
       btn.classList.add('claimed');
       btn.disabled = true;
     }
 
-    // Interactive Proposal "No" Button escape logic
     const noBtn = document.getElementById('no-btn');
     const container = document.getElementById('ask-container');
 
-    // Default CSS setup for absolute placement inside button group container
     noBtn.style.right = '20px';
     noBtn.style.top = '0px';
 
@@ -833,7 +1130,6 @@
       const containerRect = container.getBoundingClientRect();
       const btnRect = noBtn.getBoundingClientRect();
 
-      // Ensure the button jumps to a location comfortably within the visual card
       const maxX = containerRect.width - btnRect.width - 30;
       const maxY = containerRect.height - btnRect.height - 40;
 
@@ -844,7 +1140,6 @@
       noBtn.style.top = `${randomY}px`;
     }
 
-    // Both touch and mouse support to prevent cheating!
     noBtn.addEventListener('touchstart', (e) => {
       e.preventDefault();
       moveNoButton();
@@ -855,7 +1150,6 @@
       document.getElementById('ask-container').style.display = 'none';
       document.getElementById('success-container').style.display = 'block';
       
-      // Heart Shower burst effect
       for (let i = 0; i < 15; i++) {
         setTimeout(spawnHeart, i * 100);
       }
@@ -874,7 +1168,41 @@
       }, 4000);
     }
 
-    // Confetti Generator (Lightweight Canvas solution)
+    // Lightbox functions
+    function openLightbox(el, imgSrc, caption) {
+      document.getElementById('lightbox-img').innerHTML = '<img src="' + imgSrc + '" alt="Memory" style="width:100%;height:100%;object-fit:cover;border-radius:2px;">';
+      document.getElementById('lightbox-caption').innerText = caption;
+      document.getElementById('lightbox-overlay').classList.add('show');
+
+      const rect = el.getBoundingClientRect();
+      for (let i = 0; i < 10; i++) {
+        spawnSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      }
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox-overlay').classList.remove('show');
+    }
+
+    function closeLightboxOnOverlay(e) {
+      if (e.target.id === 'lightbox-overlay') closeLightbox();
+    }
+
+    function spawnSparkle(x, y) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.innerText = ['✨', '💫', '⭐'][Math.floor(Math.random() * 3)];
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+      const angle = Math.random() * 2 * Math.PI;
+      const distance = Math.random() * 60 + 30;
+      sparkle.style.setProperty('--sx', `${Math.cos(angle) * distance}px`);
+      sparkle.style.setProperty('--sy', `${Math.sin(angle) * distance}px`);
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 900);
+    }
+
+    // Confetti
     const canvas = document.getElementById("confetti");
     const ctx = canvas.getContext("2d");
     let pieces = [];
